@@ -1,11 +1,11 @@
 package com.hannesdorfmann.navigation.coordinator
 
 import android.support.v4.app.FragmentActivity
-import com.hannesdorfmann.navigation.view.iap.IapFragment
+import com.hannesdorfmann.navigation.view.iap.IapNewsFragment
 import com.hannesdorfmann.navigation.view.login.LoginFragment
 import com.hannesdorfmann.navigation.view.newsdetails.NewsDetailFragment
 import com.hannesdorfmann.navigation.view.newslist.NewsListFragment
-import com.hannesdorfmann.navigation.view.onboarding.PersonalInteresstsFragment
+import com.hannesdorfmann.navigation.view.onboarding.personalinteressts.PersonalInteresstsFragment
 
 class Navigator {
 
@@ -14,23 +14,26 @@ class Navigator {
     fun showOnboarding() {
         activty!!.supportFragmentManager
                 .beginTransaction()
-                .replace(com.hannesdorfmann.navigation.R.id.root, PersonalInteresstsFragment())
+                .replace(com.hannesdorfmann.navigation.R.id.fragmentContainer, PersonalInteresstsFragment())
                 .commit()
 
     }
 
-    fun showInAppPurchases() {
-        activty!!.supportFragmentManager
+    fun showInAppPurchases(addToBackStack: Boolean) {
+        val t = activty!!.supportFragmentManager
                 .beginTransaction()
-                .replace(com.hannesdorfmann.navigation.R.id.root, IapFragment())
-                .commit()
+                .replace(com.hannesdorfmann.navigation.R.id.fragmentContainer, IapNewsFragment())
 
+        if (addToBackStack)
+            t.addToBackStack(null)
+
+        t.commit()
     }
 
     fun showLogin() {
         activty!!.supportFragmentManager
                 .beginTransaction()
-                .replace(com.hannesdorfmann.navigation.R.id.root, LoginFragment())
+                .replace(com.hannesdorfmann.navigation.R.id.fragmentContainer, LoginFragment())
                 .commit()
 
     }
@@ -43,7 +46,7 @@ class Navigator {
     fun showNewsList() {
         activty!!.supportFragmentManager
                 .beginTransaction()
-                .replace(com.hannesdorfmann.navigation.R.id.root, NewsListFragment())
+                .replace(com.hannesdorfmann.navigation.R.id.fragmentContainer, NewsListFragment())
                 .commit()
 
     }
@@ -51,7 +54,7 @@ class Navigator {
     fun showNewsDetails(newsId: Int) {
         activty!!.supportFragmentManager
                 .beginTransaction()
-                .replace(com.hannesdorfmann.navigation.R.id.root, NewsDetailFragment())
+                .replace(com.hannesdorfmann.navigation.R.id.fragmentContainer, NewsDetailFragment())
                 .addToBackStack(null)
                 .commit()
     }

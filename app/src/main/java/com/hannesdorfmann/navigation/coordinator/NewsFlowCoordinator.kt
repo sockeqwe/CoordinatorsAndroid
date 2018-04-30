@@ -9,7 +9,7 @@ class NewsFlowCoordinator(
 
     fun onNewsClosed() {
         if (abTest.isB()) {
-            navigator.showInAppPurchases()
+            navigator.showInAppPurchases(addToBackStack = true)
         } else {
             navigator.closeNews()
         }

@@ -1,4 +1,4 @@
-package com.hannesdorfmann.navigation.view.onboarding
+package com.hannesdorfmann.navigation.view.onboarding.personalinteressts
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel

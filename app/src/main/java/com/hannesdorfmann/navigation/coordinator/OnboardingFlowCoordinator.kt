@@ -17,7 +17,7 @@ class OnboardingFlowCoordinator(
         if (abTest.isA()){
             onboardingFinished()
         } else {
-            navigator.showInAppPurchases()
+            navigator.showInAppPurchases(addToBackStack = false)
         }
     }
 

@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    android:padding="16dp">
 
     <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/newsDetail"
-        >
-        <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
@@ -32,20 +31,22 @@
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:text="TextView"
+                android:layout_marginTop="8dp"
+                android:text="Some big news"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="@+id/imageView"
-                tools:text="Some big news" />
+                android:layout_toRightOf="@+id/imageView"
+                />
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
@@ -54,8 +55,10 @@
                 android:text="Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat."
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
-        </android.support.constraint.ConstraintLayout>
-
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                android:layout_toRightOf="@+id/imageView"
+                android:layout_below="@+id/title"
+                />
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 </FrameLayout>

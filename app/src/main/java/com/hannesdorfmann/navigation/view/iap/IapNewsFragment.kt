@@ -10,7 +10,7 @@ import com.hannesdorfmann.navigation.R
 import com.hannesdorfmann.navigation.utils.getViewModel
 import kotlinx.android.synthetic.main.fragment_purchase.*
 
-class IapFragment : Fragment(), OnBackPressed {
+open class IapNewsFragment : Fragment(), OnBackPressed {
 
     private lateinit var vm: IapViewModel
 

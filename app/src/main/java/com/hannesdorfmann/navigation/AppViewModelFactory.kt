@@ -4,7 +4,6 @@ import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
-import android.util.Log
 import com.hannesdorfmann.navigation.coordinator.*
 import com.hannesdorfmann.navigation.domain.ab.AbTest
 import com.hannesdorfmann.navigation.domain.news.NewsRepository
@@ -14,7 +13,7 @@ import com.hannesdorfmann.navigation.view.iap.IapViewModel
 import com.hannesdorfmann.navigation.view.login.LoginViewModel
 import com.hannesdorfmann.navigation.view.newsdetails.NewsDetailViewModel
 import com.hannesdorfmann.navigation.view.newslist.NewsListViewModel
-import com.hannesdorfmann.navigation.view.onboarding.PersonalInteresstsViewModel
+import com.hannesdorfmann.navigation.view.onboarding.personalinteressts.PersonalInteresstsViewModel
 
 
 class AppViewModelFactory(application: Application) : ViewModelProvider.Factory {
@@ -60,42 +59,34 @@ class AppViewModelFactory(application: Application) : ViewModelProvider.Factory 
     }
 
 
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T = when (modelClass) {
+        LoginViewModel::class.java -> LoginViewModel(
+                loginStateMachine = LoginStateMachine(usermanager)
+        )
+        PersonalInteresstsViewModel::class.java -> PersonalInteresstsViewModel(
+                newsRepository = newsRepository,
+                nextNavigation = onboardingCoordinator::onPersonalInterestsSelected
 
-        val same = modelClass.toString() == LoginViewModel::class.java.toString()
+        )
+        NewsListViewModel::class.java -> NewsListViewModel(
+                newsRepository = newsRepository,
+                onItemSelected = newsCoordinator::onNewsDetailsSelected
+        )
 
-        val c = modelClass.toString()
-        Log.d("ViewModelFactory", "Trying creating '${modelClass.toString()}' and '${LoginViewModel::class.java.toString()}' same $same")
-        return if (c == LoginViewModel::class.java.toString())
-            LoginViewModel(
-                    loginStateMachine = LoginStateMachine(usermanager)
-            ) as T
-        else if (c == PersonalInteresstsViewModel::class.java.toString()) {
-
-            PersonalInteresstsViewModel(
-                    newsRepository = newsRepository,
-                    nextNavigation = onboardingCoordinator::onPersonalInterestsSelected
-
-            ) as T
-        } else if (c == NewsListViewModel::class.java.toString())
-            NewsListViewModel(
-                    newsRepository = newsRepository,
-                    onItemSelected = newsCoordinator::onNewsDetailsSelected
-            ) as T
-        else if (c == NewsDetailViewModel::class.java.toString()) {
-
+        NewsDetailViewModel::class.java ->
             NewsDetailViewModel(
                     newsRepository = newsRepository,
                     newsId = 1,
                     onCloseNews = newsCoordinator::onNewsClosed
-            ) as T
-        } else if (c == IapViewModel::class.java.toString()) {
-            IapViewModel(
-                    close = { true }
-            ) as T
-        }
-        else throw IllegalArgumentException("No ViewModel registered for $modelClass")
-    }
+            )
+        IapViewModel::class.java -> IapViewModel(
+                close = { true }
+        )
+
+
+
+        else -> throw IllegalArgumentException("No ViewModel registered for $modelClass")
+    } as T
 }
 
 

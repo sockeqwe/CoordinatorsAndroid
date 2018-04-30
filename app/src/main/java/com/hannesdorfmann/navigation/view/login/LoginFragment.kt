@@ -38,7 +38,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun render(state: LoginViewState) {
-        TransitionManager.beginDelayedTransition(root)
+        TransitionManager.beginDelayedTransition(loginContainer)
         when (state) {
             LoginViewState.LoadingState -> {
                 loading.visible()

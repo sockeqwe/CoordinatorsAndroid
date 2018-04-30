@@ -18,10 +18,8 @@ class NewsListFragment : Fragment() {
 
     private lateinit var adapter: NewsListAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_newslist, null, false)
-        return v
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+            inflater.inflate(R.layout.fragment_newslist, null, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

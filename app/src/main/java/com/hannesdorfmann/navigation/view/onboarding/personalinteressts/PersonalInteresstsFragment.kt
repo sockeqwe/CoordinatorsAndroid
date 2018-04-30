@@ -1,4 +1,4 @@
-package com.hannesdorfmann.navigation.view.onboarding
+package com.hannesdorfmann.navigation.view.onboarding.personalinteressts
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
