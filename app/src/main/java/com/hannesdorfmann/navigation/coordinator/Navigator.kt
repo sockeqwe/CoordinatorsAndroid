@@ -6,15 +6,24 @@ import com.hannesdorfmann.navigation.view.login.LoginFragment
 import com.hannesdorfmann.navigation.view.newsdetails.NewsDetailFragment
 import com.hannesdorfmann.navigation.view.newslist.NewsListFragment
 import com.hannesdorfmann.navigation.view.onboarding.personalinteressts.PersonalInteresstsFragment
+import com.hannesdorfmann.navigation.view.onboarding.welcome.WelcomeFragment
 
 class Navigator {
 
     var activty: FragmentActivity? = null
 
-    fun showOnboarding() {
+    fun showOnboarindPersonalInteressts() {
         activty!!.supportFragmentManager
                 .beginTransaction()
                 .replace(com.hannesdorfmann.navigation.R.id.fragmentContainer, PersonalInteresstsFragment())
+                .commit()
+
+    }
+
+    fun showOnboadingWelcome() {
+        activty!!.supportFragmentManager
+                .beginTransaction()
+                .replace(com.hannesdorfmann.navigation.R.id.fragmentContainer, WelcomeFragment())
                 .commit()
 
     }

@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.hannesdorfmann.navigation.R
 import com.hannesdorfmann.navigation.domain.news.News
 import com.hannesdorfmann.navigation.utils.getViewModel
@@ -17,17 +15,15 @@ import kotlinx.android.synthetic.main.item_news.view.*
 class NewsListFragment : Fragment() {
 
     private lateinit var adapter: NewsListAdapter
+    private lateinit var vm: NewsListViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
             inflater.inflate(R.layout.fragment_newslist, null, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val vm: NewsListViewModel = getViewModel()
+        setHasOptionsMenu(true)
+        vm = getViewModel()
 
         vm.items.subscribe(this) {
             adapter.items = it
@@ -38,6 +34,20 @@ class NewsListFragment : Fragment() {
         recyclerView.adapter = adapter
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.logout, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.logout -> {
+                vm.logout()
+                true
+            }
+            else -> false
+        }
+    }
 }
 
 

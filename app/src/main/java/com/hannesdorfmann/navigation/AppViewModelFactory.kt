@@ -14,6 +14,7 @@ import com.hannesdorfmann.navigation.view.login.LoginViewModel
 import com.hannesdorfmann.navigation.view.newsdetails.NewsDetailViewModel
 import com.hannesdorfmann.navigation.view.newslist.NewsListViewModel
 import com.hannesdorfmann.navigation.view.onboarding.personalinteressts.PersonalInteresstsViewModel
+import com.hannesdorfmann.navigation.view.onboarding.welcome.WelcomeViewModel
 
 
 class AppViewModelFactory(application: Application) : ViewModelProvider.Factory {
@@ -36,10 +37,9 @@ class AppViewModelFactory(application: Application) : ViewModelProvider.Factory 
     //
     // Coordinator
     //
-    val rootCoordinator = RootFlowCoordinator(usermanager, navigator)
+    val rootCoordinator = RootFlowCoordinator(usermanager)
     private val onboardingCoordinator = OnboardingFlowCoordinator(
             navigator = navigator,
-            abTest = abTest,
             onboardingFinished = rootCoordinator::onboardingCompleted
     )
     private val newsCoordinator = NewsFlowCoordinator(
@@ -65,12 +65,14 @@ class AppViewModelFactory(application: Application) : ViewModelProvider.Factory 
         )
         PersonalInteresstsViewModel::class.java -> PersonalInteresstsViewModel(
                 newsRepository = newsRepository,
-                nextNavigation = onboardingCoordinator::onPersonalInterestsSelected
+                nextNavigation = onboardingCoordinator::onPersonalInterestsSelected,
+                usermanager = usermanager
 
         )
         NewsListViewModel::class.java -> NewsListViewModel(
                 newsRepository = newsRepository,
-                onItemSelected = newsCoordinator::onNewsDetailsSelected
+                onItemSelected = newsCoordinator::onNewsDetailsSelected,
+                userManager = usermanager
         )
 
         NewsDetailViewModel::class.java ->
@@ -83,7 +85,10 @@ class AppViewModelFactory(application: Application) : ViewModelProvider.Factory 
                 close = { true }
         )
 
-
+        WelcomeViewModel::class.java -> WelcomeViewModel(
+                usermanager = usermanager,
+                onNextClicked = onboardingCoordinator::onWelcomeShown
+        )
 
         else -> throw IllegalArgumentException("No ViewModel registered for $modelClass")
     } as T

@@ -7,9 +7,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
 class RootFlowCoordinator(
-        private val usermanager: Usermanager,
-        private val navigator: Navigator
-) {
+        private val usermanager: Usermanager
+        ) {
 
 
     lateinit var loginFlowCoordinator: LoginFlowCoordinator
@@ -20,7 +19,11 @@ class RootFlowCoordinator(
         usermanager.currentUser.delay(1, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
             when (it) {
                 is NotAuthenticated -> loginFlowCoordinator.start()
-                is AuthenticatedUser -> newsFlowCoordinator.start()
+                is AuthenticatedUser -> if (it.onboardingCompleted) {
+                    newsFlowCoordinator.start()
+                } else {
+                    onboardingCoordinator.start()
+                }
             }
         }
     }

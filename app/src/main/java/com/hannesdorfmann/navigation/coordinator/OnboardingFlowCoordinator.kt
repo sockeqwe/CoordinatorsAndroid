@@ -1,29 +1,21 @@
 package com.hannesdorfmann.navigation.coordinator
 
-import com.hannesdorfmann.navigation.domain.ab.AbTest
-
 class OnboardingFlowCoordinator(
         private val navigator: Navigator,
-        private val abTest: AbTest,
-        private val onboardingFinished : () -> Unit
+        private val onboardingFinished: () -> Unit
 ) {
 
 
-    fun onInAppPurchaseClosed(){
+    fun onPersonalInterestsSelected() {
         onboardingFinished()
     }
 
-    fun onPersonalInterestsSelected(){
-        if (abTest.isA()){
-            onboardingFinished()
-        } else {
-            navigator.showInAppPurchases(addToBackStack = false)
-        }
+    fun onWelcomeShown() {
+        navigator.showOnboarindPersonalInteressts()
     }
 
-
     fun start() {
-        navigator.showOnboarding()
+        navigator.showOnboadingWelcome()
     }
 
 }
