@@ -6,9 +6,7 @@ import com.hannesdorfmann.navigation.domain.user.Usermanager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
-class RootFlowCoordinator(
-        private val usermanager: Usermanager
-        ) {
+class RootFlowCoordinator(usermanager: Usermanager) {
 
 
     lateinit var loginFlowCoordinator: LoginFlowCoordinator

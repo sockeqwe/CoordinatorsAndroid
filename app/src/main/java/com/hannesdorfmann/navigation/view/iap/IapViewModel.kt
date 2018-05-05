@@ -3,7 +3,7 @@ package com.hannesdorfmann.navigation.view.iap
 import android.arch.lifecycle.ViewModel
 
 class IapViewModel(
-        private var close: (() -> Boolean)?
+        private var close: (() -> Unit)?
 ) : ViewModel() {
 
     fun onBuyingClicked() {

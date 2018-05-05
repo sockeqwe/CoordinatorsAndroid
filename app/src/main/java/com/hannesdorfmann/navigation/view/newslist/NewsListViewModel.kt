@@ -2,6 +2,7 @@ package com.hannesdorfmann.navigation.view.newslist
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.hannesdorfmann.navigation.domain.ab.AbTest
 import com.hannesdorfmann.navigation.domain.news.News
 import com.hannesdorfmann.navigation.domain.news.NewsRepository
 import com.hannesdorfmann.navigation.domain.user.Usermanager
@@ -10,6 +11,7 @@ import io.reactivex.disposables.Disposable
 class NewsListViewModel(
         newsRepository: NewsRepository,
         private val userManager: Usermanager,
+        private val abTest: AbTest,
         private var onItemSelected: ((Int) -> Unit)?
 ) : ViewModel() {
 
@@ -33,5 +35,9 @@ class NewsListViewModel(
 
     fun logout() {
         userManager.logout().blockingAwait()
+    }
+
+    fun toggleABTestGroupAssignment() {
+        abTest.toggleAssignedTestGroup()
     }
 }

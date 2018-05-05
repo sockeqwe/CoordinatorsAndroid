@@ -15,6 +15,10 @@ class NewsFlowCoordinator(
         }
     }
 
+    fun onIapClosed(){
+        navigator.closeIap()
+    }
+
     fun onNewsDetailsSelected(newsId: Int) {
         navigator.showNewsDetails(newsId)
     }

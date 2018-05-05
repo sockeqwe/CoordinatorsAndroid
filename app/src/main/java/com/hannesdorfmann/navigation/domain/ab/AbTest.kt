@@ -1,6 +1,11 @@
 package com.hannesdorfmann.navigation.domain.ab
 
 class AbTest {
-    fun isA(): Boolean = false
-    fun isB(): Boolean = true
+    private var isA = false
+    fun isA(): Boolean = isA
+    fun isB(): Boolean = !isA
+
+    fun toggleAssignedTestGroup() {
+        isA = !isA
+    }
 }

@@ -26,6 +26,7 @@ open class IapNewsFragment : Fragment(), OnBackPressed {
     }
 
     override fun onBackPressed(): Boolean {
-        return vm.onBackPressed()
+        vm.onBackPressed()
+        return true
     }
 }

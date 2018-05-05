@@ -25,24 +25,29 @@ class NewsListFragment : Fragment() {
         setHasOptionsMenu(true)
         vm = getViewModel()
 
-        vm.items.subscribe(this) {
-            adapter.items = it
-        }
-
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = NewsListAdapter(layoutInflater, vm::itemSelected)
         recyclerView.adapter = adapter
+
+        vm.items.subscribe(this) {
+            adapter.items = it
+            adapter.notifyDataSetChanged()
+        }
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.logout, menu)
+        inflater.inflate(R.menu.menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.logout -> {
                 vm.logout()
+                true
+            }
+            R.id.toggleABTestGroup -> {
+                vm.toggleABTestGroupAssignment()
                 true
             }
             else -> false

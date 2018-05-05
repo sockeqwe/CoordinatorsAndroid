@@ -49,9 +49,6 @@ class AppViewModelFactory(application: Application) : ViewModelProvider.Factory 
     private val loginCoordinator = LoginFlowCoordinator(navigator = navigator)
 
 
-    //
-    // Init
-    //
     init {
         rootCoordinator.onboardingCoordinator = onboardingCoordinator
         rootCoordinator.loginFlowCoordinator = loginCoordinator
@@ -72,17 +69,17 @@ class AppViewModelFactory(application: Application) : ViewModelProvider.Factory 
         NewsListViewModel::class.java -> NewsListViewModel(
                 newsRepository = newsRepository,
                 onItemSelected = newsCoordinator::onNewsDetailsSelected,
+                abTest = abTest,
                 userManager = usermanager
         )
 
         NewsDetailViewModel::class.java ->
             NewsDetailViewModel(
                     newsRepository = newsRepository,
-                    newsId = 1,
                     onCloseNews = newsCoordinator::onNewsClosed
             )
         IapViewModel::class.java -> IapViewModel(
-                close = { true }
+                close = newsCoordinator::onIapClosed
         )
 
         WelcomeViewModel::class.java -> WelcomeViewModel(

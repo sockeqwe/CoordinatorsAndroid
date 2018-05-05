@@ -1,6 +1,7 @@
 package com.hannesdorfmann.navigation.coordinator
 
 import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
 import com.hannesdorfmann.navigation.view.iap.IapNewsFragment
 import com.hannesdorfmann.navigation.view.login.LoginFragment
 import com.hannesdorfmann.navigation.view.newsdetails.NewsDetailFragment
@@ -63,9 +64,14 @@ class Navigator {
     fun showNewsDetails(newsId: Int) {
         activty!!.supportFragmentManager
                 .beginTransaction()
-                .replace(com.hannesdorfmann.navigation.R.id.fragmentContainer, NewsDetailFragment())
-                .addToBackStack(null)
+                .replace(com.hannesdorfmann.navigation.R.id.fragmentContainer, NewsDetailFragment.newInstance(newsId))
+                .addToBackStack("NewsDetail")
                 .commit()
+    }
+
+    fun closeIap() {
+        activty!!.supportFragmentManager
+                .popBackStack("NewsDetail", FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
 }
