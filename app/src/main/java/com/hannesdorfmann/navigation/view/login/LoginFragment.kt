@@ -33,6 +33,13 @@ class LoginFragment : Fragment() {
             )
         }
 
+        register.setOnClickListener {
+            viewModel.signUp()
+        }
+
+        forgotPassword.setOnClickListener {
+            viewModel.forgotPassword()
+        }
 
         viewModel.state.subscribe(this, this::render)
     }

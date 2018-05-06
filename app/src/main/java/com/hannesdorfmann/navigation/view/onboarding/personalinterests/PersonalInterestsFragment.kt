@@ -1,4 +1,4 @@
-package com.hannesdorfmann.navigation.view.onboarding.personalinteressts
+package com.hannesdorfmann.navigation.view.onboarding.personalinterests
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,7 +10,7 @@ import com.hannesdorfmann.navigation.utils.getViewModel
 import com.hannesdorfmann.navigation.utils.subscribe
 import kotlinx.android.synthetic.main.fragment_categories.*
 
-class PersonalInteresstsFragment : Fragment() {
+class PersonalInterestsFragment : Fragment() {
 
     lateinit var adapter: PersonalInteresstsAdapter
 
@@ -20,7 +20,7 @@ class PersonalInteresstsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val viewModel: PersonalInteresstsViewModel = getViewModel()
+        val viewModel: PersonalInterestsViewModel = getViewModel()
 
         adapter = PersonalInteresstsAdapter(layoutInflater) {
             viewModel.toggleSelected(it)

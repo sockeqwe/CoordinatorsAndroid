@@ -1,4 +1,4 @@
-package com.hannesdorfmann.navigation.view.onboarding.personalinteressts
+package com.hannesdorfmann.navigation.view.onboarding.personalinterests
 
 import android.graphics.drawable.ColorDrawable
 import android.support.v4.content.ContextCompat

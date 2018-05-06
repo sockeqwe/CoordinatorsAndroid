@@ -1,4 +1,4 @@
-package com.hannesdorfmann.navigation.view.onboarding.personalinteressts
+package com.hannesdorfmann.navigation.view.onboarding.personalinterests
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
@@ -7,7 +7,7 @@ import com.hannesdorfmann.navigation.domain.news.NewsRepository
 import com.hannesdorfmann.navigation.domain.user.Usermanager
 import io.reactivex.disposables.Disposable
 
-class PersonalInteresstsViewModel(
+class PersonalInterestsViewModel(
         private val newsRepository: NewsRepository,
         private val usermanager: Usermanager,
         private var nextNavigation: (() -> Unit)?

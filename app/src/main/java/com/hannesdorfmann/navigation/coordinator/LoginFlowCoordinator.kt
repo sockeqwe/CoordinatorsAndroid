@@ -7,4 +7,12 @@ class LoginFlowCoordinator(
     fun start(){
         navigator.showLogin()
     }
+
+    fun registerNewUser(){
+        navigator.showRegistration()
+    }
+
+    fun forgotPassword(){
+        navigator.showRecoverPassword()
+    }
 }

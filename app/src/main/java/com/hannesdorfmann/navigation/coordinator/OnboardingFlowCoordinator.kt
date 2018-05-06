@@ -11,7 +11,7 @@ class OnboardingFlowCoordinator(
     }
 
     fun onWelcomeShown() {
-        navigator.showOnboarindPersonalInteressts()
+        navigator.showOnboarindPersonalInterests()
     }
 
     fun start() {

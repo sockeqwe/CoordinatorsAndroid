@@ -13,7 +13,7 @@ import com.hannesdorfmann.navigation.view.iap.IapViewModel
 import com.hannesdorfmann.navigation.view.login.LoginViewModel
 import com.hannesdorfmann.navigation.view.newsdetails.NewsDetailViewModel
 import com.hannesdorfmann.navigation.view.newslist.NewsListViewModel
-import com.hannesdorfmann.navigation.view.onboarding.personalinteressts.PersonalInteresstsViewModel
+import com.hannesdorfmann.navigation.view.onboarding.personalinterests.PersonalInterestsViewModel
 import com.hannesdorfmann.navigation.view.onboarding.welcome.WelcomeViewModel
 
 
@@ -58,9 +58,11 @@ class AppViewModelFactory(application: Application) : ViewModelProvider.Factory 
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T = when (modelClass) {
         LoginViewModel::class.java -> LoginViewModel(
-                loginStateMachine = LoginStateMachine(usermanager)
+                loginStateMachine = LoginStateMachine(usermanager),
+                onForgotPasswordClicked = loginCoordinator::forgotPassword,
+                onSignUpClicked = loginCoordinator::registerNewUser
         )
-        PersonalInteresstsViewModel::class.java -> PersonalInteresstsViewModel(
+        PersonalInterestsViewModel::class.java -> PersonalInterestsViewModel(
                 newsRepository = newsRepository,
                 nextNavigation = onboardingCoordinator::onPersonalInterestsSelected,
                 usermanager = usermanager

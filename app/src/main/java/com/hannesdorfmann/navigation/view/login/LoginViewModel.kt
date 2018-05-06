@@ -9,7 +9,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class LoginViewModel(
-        private val loginStateMachine: LoginStateMachine
+        private val loginStateMachine: LoginStateMachine,
+        private var onSignUpClicked: (() -> Unit)?,
+        private var onForgotPasswordClicked: (() -> Unit)?
 ) : ViewModel() {
 
     val state: MutableLiveData<LoginViewState> = MutableLiveData<LoginViewState>()
@@ -21,12 +23,6 @@ class LoginViewModel(
                 .subscribeOn(Schedulers.io())
                 .share()
                 .observeOn(AndroidSchedulers.mainThread())
-
-        disposables + sharedLoginState
-                .filter { it == LoginStateMachine.State.Successful }
-                .subscribe {
-                    // TODO navigation
-                }
 
         disposables + sharedLoginState
                 .filter { it != LoginStateMachine.State.Successful }
@@ -48,10 +44,19 @@ class LoginViewModel(
         loginStateMachine.input.accept(loginCredentials)
     }
 
+    fun signUp(){
+        onSignUpClicked!!()
+    }
+
+    fun forgotPassword(){
+        onForgotPasswordClicked!!()
+    }
 
     override fun onCleared() {
         super.onCleared()
         disposables.dispose()
+        onSignUpClicked = null
+        onForgotPasswordClicked = null
     }
 }
 
