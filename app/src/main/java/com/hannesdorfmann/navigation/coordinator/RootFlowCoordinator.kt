@@ -14,7 +14,7 @@ class RootFlowCoordinator(usermanager: Usermanager) {
     lateinit var newsFlowCoordinator: NewsFlowCoordinator
 
     init {
-        usermanager.currentUser.delay(1, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
+        usermanager.currentUser.observeOn(AndroidSchedulers.mainThread()).subscribe {
             when (it) {
                 is NotAuthenticated -> loginFlowCoordinator.start()
                 is AuthenticatedUser -> if (it.onboardingCompleted) {
